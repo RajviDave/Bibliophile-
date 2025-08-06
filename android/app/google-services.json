@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "728792097115",
+    "project_id": "flutter-udemy-72d04",
+    "storage_bucket": "flutter-udemy-72d04.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728792097115:android:2ff66e72fb0866f0fd7a7e",
+        "android_client_info": {
+          "package_name": "com.example.flutter_udemy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8_YafATbD1_a0xi_6Q0NcoW-Kqk-1yfA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
