@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
+  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 }
 
 class MyApp extends StatelessWidget {
@@ -17,6 +20,7 @@ class CounterPage extends StatefulWidget {
   const CounterPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _CounterPageState createState() => _CounterPageState();
 }
 
