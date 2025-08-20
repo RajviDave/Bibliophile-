@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
-class FeedScreen extends StatelessWidget {
-  final List<Map<String, String>> books = [
+class FeedScreen extends StatefulWidget {
+  @override
+  _FeedScreenState createState() => _FeedScreenState();
+}
+
+class _FeedScreenState extends State<FeedScreen> {
+  final ScrollController _scrollController = ScrollController();
+  final List<Map<String, String>> allBooks = [
     {
       "title": "The Great Gatsby",
       "img": "https://covers.openlibrary.org/b/id/7222246-L.jpg",
@@ -36,6 +43,38 @@ class FeedScreen extends StatelessWidget {
     },
   ];
 
+  List<Map<String, String>> feedBooks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadMoreBooks();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent - 200) {
+        _loadMoreBooks();
+      }
+    });
+  }
+
+  void _loadMoreBooks() {
+    List<Map<String, String>> newBooks = [];
+    var rng = Random();
+    for (int i = 0; i < 10; i++) {
+      newBooks.add(allBooks[rng.nextInt(allBooks.length)]);
+    }
+    setState(() {
+      feedBooks.addAll(newBooks);
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,13 +82,14 @@ class FeedScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: GridView.builder(
+          controller: _scrollController,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // 2 columns like Pinterest
+            crossAxisCount: 2, // Pinterest-like 2 columns
             crossAxisSpacing: 8,
             mainAxisSpacing: 8,
-            childAspectRatio: 0.7, // taller cards
+            childAspectRatio: 0.7,
           ),
-          itemCount: books.length,
+          itemCount: feedBooks.length,
           itemBuilder: (context, index) {
             return Container(
               decoration: BoxDecoration(
@@ -72,15 +112,17 @@ class FeedScreen extends StatelessWidget {
                         top: Radius.circular(16),
                       ),
                       child: Image.network(
-                        books[index]["img"]!,
+                        feedBooks[index]["img"]!,
                         fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) =>
+                            Icon(Icons.error, size: 50),
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      books[index]["title"]!,
+                      feedBooks[index]["title"]!,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
