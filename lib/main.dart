@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_udemy/loginpage.dart'; // <-- make sure the path is correct
+import 'home.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(BibliophileApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+class BibliophileApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Login App',
-      home: LoginPage(), // <-- set your login page here
+      title: 'Bibliophile',
+      theme: ThemeData(primarySwatch: Colors.red),
+      home: HomeScreen(),
     );
   }
 }
