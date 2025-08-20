@@ -6,6 +6,8 @@ void main() {
 }
 
 class BibliophileApp extends StatelessWidget {
+  const BibliophileApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
