@@ -1,8 +1,35 @@
 import 'package:flutter/material.dart';
 import 'signup_page.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
+
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  // ✅ Controllers
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // ✅ Always dispose controllers to free memory
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  void _signIn() {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+
+    // For now just print
+    print("Email: $email, Password: $password");
+
+    // Later: add your backend auth logic here
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +43,6 @@ class SignInPage extends StatelessWidget {
               children: [
                 const SizedBox(height: 40),
 
-                // Title
                 const Text(
                   "SignIn",
                   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
@@ -25,6 +51,7 @@ class SignInPage extends StatelessWidget {
 
                 // Email field
                 TextField(
+                  controller: emailController, // ✅ added controller
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.email),
                     hintText: "Email",
@@ -39,6 +66,7 @@ class SignInPage extends StatelessWidget {
 
                 // Password field
                 TextField(
+                  controller: passwordController, // ✅ added controller
                   obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.lock),
@@ -63,7 +91,7 @@ class SignInPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: _signIn, // ✅ function
                     child: const Text(
                       "Sign In",
                       style: TextStyle(color: Colors.white, fontSize: 16),
@@ -72,7 +100,6 @@ class SignInPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
 
-                // Sign Up link
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -82,7 +109,7 @@ class SignInPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const SignupPage(),
+                            builder: (context) => const SignUpPage(),
                           ),
                         );
                       },
