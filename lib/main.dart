@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
+import 'signin_page.dart';
 
 void main() {
-  runApp(BibliophileApp());
+  runApp(const MyApp());
 }
 
-class BibliophileApp extends StatelessWidget {
-  const BibliophileApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Bibliophile',
-      theme: ThemeData(primarySwatch: Colors.red),
-      home: HomeScreen(),
+      home: const SignInPage(),
     );
   }
 }
