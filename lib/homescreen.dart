@@ -41,6 +41,22 @@ class _HomeScreenState extends State<HomeScreen> {
             keyboardType: TextInputType.emailAddress,
           ),
           SizedBox(height: 20),
+          TextFormField(
+            controller: passwordCTRL,
+            decoration: InputDecoration(
+              hintText: 'password',
+              filled: true,
+              fillColor: Colors.grey,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+              prefixIcon: Icon(Icons.lock, color: Colors.black),
+            ),
+            keyboardType: TextInputType.emailAddress,
+          ),
+          SizedBox(height: 32),
+          ElevatedButton(onPressed: () {}, child: Text("SignIn")),
         ],
       ),
     );
